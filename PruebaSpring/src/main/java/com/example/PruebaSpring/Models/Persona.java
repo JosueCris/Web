@@ -2,7 +2,7 @@ package com.example.PruebaSpring.Models;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "persona")
@@ -18,7 +18,7 @@ public class Persona {
     @Column(name = "ApMaterno")
     private String apMaterno;
     @Column(name = "FechaNac")
-    private Date fechaNac;
+    private LocalDate fechaNac;
 
     public Persona() {
     }
@@ -27,14 +27,14 @@ public class Persona {
         this.idPersona = idPersona;
     }
 
-    public Persona(String nombre, String apPaterno, String apMaterno, Date fechaNac) {
+    public Persona(String nombre, String apPaterno, String apMaterno, LocalDate fechaNac) {
         this.nombre = nombre;
         this.apPaterno = apPaterno;
         this.apMaterno = apMaterno;
         this.fechaNac = fechaNac;
     }
 
-    public Persona(int idPersona, String nombre, String apPaterno, String apMaterno, Date fechaNac) {
+    public Persona(int idPersona, String nombre, String apPaterno, String apMaterno, LocalDate fechaNac) {
         this.idPersona = idPersona;
         this.nombre = nombre;
         this.apPaterno = apPaterno;
@@ -74,11 +74,11 @@ public class Persona {
         this.apMaterno = apMaterno;
     }
 
-    public Date getFechaNac() {
+    public LocalDate getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(Date fechaNac) {
+    public void setFechaNac(LocalDate fechaNac) {
         this.fechaNac = fechaNac;
     }
 

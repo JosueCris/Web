@@ -18,10 +18,18 @@ public class IPersonaService implements PersonaService {
         this.repo = repo;
     }
 
+
+    @Override
+    public Persona buscar(int idPersona) {
+        return this.repo.findById(idPersona).orElse(null);
+    }
+
+
     @Override
     public List<Persona> consultar() {
         return (List<Persona>) this.repo.findAll();
     }
+
 
     @Override
     public Persona agregar(Persona per) {
@@ -31,15 +39,12 @@ public class IPersonaService implements PersonaService {
         return repo.save(per);
     }
 
+
     @Override
     public Persona actualizar(Persona per) {
         return this.repo.save(per);
     }
 
-    @Override
-    public Persona buscar(int idPersona) {
-        return this.repo.findById(idPersona).orElse(null);
-    }
 
     @Override
     public void eliminar(int idPersona) {

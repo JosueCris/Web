@@ -20,11 +20,22 @@ public class PersonaController {
     private PersonaService service;
 
     @GetMapping
+    @RequestMapping(value = "persona/get/{idPersona}", method = RequestMethod.GET)
+    public ResponseEntity<?> buscarPersona(@PathVariable int idPersona) {
+        Persona persona = this.service.buscar(idPersona);
+        if (persona != null)
+            return ResponseEntity.ok(persona);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping
     @RequestMapping(value = "persona/get/all", method = RequestMethod.GET)
     public ResponseEntity<?> consultarPersonas() {
         List<Persona> lista = this.service.consultar();
         return ResponseEntity.ok(lista);
     }
+
 
     @PostMapping
     @RequestMapping(value = "persona/save", method = RequestMethod.POST)
@@ -36,22 +47,23 @@ public class PersonaController {
         }
     }
 
-    @PostMapping
-    @RequestMapping(value = "persona/update", method = RequestMethod.POST)
-    public ResponseEntity<?> actualizarPersona(@RequestBody Persona per) {
-        Persona nuevo = this.service.actualizar(per);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
-    }
 
-    @GetMapping
-    @RequestMapping(value = "persona/get/{idPersona}", method = RequestMethod.GET)
-    public ResponseEntity<?> buscarPersona(@PathVariable int idPersona) {
-        Persona persona = this.service.buscar(idPersona);
-        if (persona != null)
-            return ResponseEntity.ok(persona);
-        return ResponseEntity.noContent().build();
-    }
+    @PutMapping
+    @RequestMapping(value = "persona/update/{idPersona}", method = RequestMethod.PUT)
+    public ResponseEntity<?> actualizarPersona(@PathVariable int idPersona, @RequestBody Persona per) {
+        Persona aux = this.service.buscar(idPersona);
+        if (aux != null) {
+            aux.setNombre(per.getNombre());
+            aux.setApPaterno(per.getApPaterno());
+            aux.setApMaterno(per.getApMaterno());
+            aux.setFechaNac(per.getFechaNac());
 
+            this.service.actualizar(aux);
+
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("La persona con ID " + idPersona + " no existe.");
+    }
 
 
     @DeleteMapping
@@ -63,5 +75,4 @@ public class PersonaController {
         this.service.eliminar(idPersona);
         return ResponseEntity.ok().build();
     }
-
 }
