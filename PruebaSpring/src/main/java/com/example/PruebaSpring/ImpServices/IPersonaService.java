@@ -41,8 +41,17 @@ public class IPersonaService implements PersonaService {
 
 
     @Override
-    public Persona actualizar(Persona per) {
-        return this.repo.save(per);
+    public Persona actualizar(Persona per, int idPersona) {
+        Persona aux = this.buscar(idPersona);
+        if (aux != null) {
+            aux.setNombre(per.getNombre());
+            aux.setApPaterno(per.getApPaterno());
+            aux.setApMaterno(per.getApMaterno());
+            aux.setFechaNac(per.getFechaNac());
+
+            return this.repo.save(aux);
+        }
+        return null;
     }
 
 
