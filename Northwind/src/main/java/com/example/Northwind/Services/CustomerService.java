@@ -7,7 +7,7 @@ import java.util.List;
 public interface CustomerService {
     Customer buscar(int idCustomer);
     List<Customer> consultar();
-    Customer agregar(Customer idCust);
+    Customer agregar(Customer cust);
     Customer actualizar(Customer cust, int idCust);
     void eliminar(int idCust);
 }

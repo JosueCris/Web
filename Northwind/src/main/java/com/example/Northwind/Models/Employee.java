@@ -12,7 +12,7 @@ public class Employee {
     @Column(name = "EmployeeID")
     private int employeeID;
     @Column(name = "LastName")
-    private String lastnameName;
+    private String lastName;
     @Column(name = "FirstName")
     private String firstName;
     @Column(name = "BirthDate")
@@ -30,7 +30,7 @@ public class Employee {
     }
 
     public Employee(String lastnameName, String firstName, LocalDate birthdate, String photo, String notes) {
-        this.lastnameName = lastnameName;
+        this.lastName = lastnameName;
         this.firstName = firstName;
         this.birthdate = birthdate;
         this.photo = photo;
@@ -39,7 +39,7 @@ public class Employee {
 
     public Employee(int employeeID, String lastnameName, String firstName, LocalDate birthdate, String photo, String notes) {
         this.employeeID = employeeID;
-        this.lastnameName = lastnameName;
+        this.lastName = lastnameName;
         this.firstName = firstName;
         this.birthdate = birthdate;
         this.photo = photo;
@@ -54,12 +54,12 @@ public class Employee {
         this.employeeID = employeeID;
     }
 
-    public String getLastnameName() {
-        return lastnameName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastnameName(String lastnameName) {
-        this.lastnameName = lastnameName;
+    public void setLastName(String lastnameName) {
+        this.lastName = lastnameName;
     }
 
     public String getFirstName() {
@@ -98,7 +98,7 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "employeeID=" + employeeID +
-                ", lastnameName='" + lastnameName + '\'' +
+                ", lastnameName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", birthdate=" + birthdate +
                 ", photo='" + photo + '\'' +
