@@ -1,4 +1,4 @@
-package Models;
+package com.example.Northwind.Models;
 
 import jakarta.persistence.*;
 
