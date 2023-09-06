@@ -1,7 +1,7 @@
 package com.example.Northwind.ImpServices;
 
 import com.example.Northwind.Models.Shipper;
-import com.example.Northwind.Respositories.ShipperRepo;
+import com.example.Northwind.Repositories.ShipperRepo;
 import com.example.Northwind.Services.ShipperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

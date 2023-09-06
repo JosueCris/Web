@@ -1,7 +1,7 @@
 package com.example.Northwind.ImpServices;
 
 import com.example.Northwind.Models.Supplier;
-import com.example.Northwind.Respositories.SupplierRepo;
+import com.example.Northwind.Repositories.SupplierRepo;
 import com.example.Northwind.Services.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.example.Northwind.Respositories;
+package com.example.Northwind.Repositories;
 
 import com.example.Northwind.Models.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
