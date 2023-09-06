@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class IOrderService implements OrderService {
     @Autowired
-    OrderRepo repo;
+    private OrderRepo repo;
 
     public IOrderService() {
         this.repo = repo;

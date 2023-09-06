@@ -9,6 +9,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProductID")
     private int productID;
+    @Column(name = "ProductName")
+    private String productName;
     @Column(name = "SupplierID")
     private int supplierID;
     @Column(name = "CategoryID")
@@ -25,15 +27,17 @@ public class Product {
         this.productID = productID;
     }
 
-    public Product(int productID, int supplierID, int categoryID, String unit, double price) {
-        this.productID = productID;
+    public Product(String productName, int supplierID, int categoryID, String unit, double price) {
+        this.productName = productName;
         this.supplierID = supplierID;
         this.categoryID = categoryID;
         this.unit = unit;
         this.price = price;
     }
 
-    public Product(int supplierID, int categoryID, String unit, double price) {
+    public Product(int productID, String productName, int supplierID, int categoryID, String unit, double price) {
+        this.productID = productID;
+        this.productName = productName;
         this.supplierID = supplierID;
         this.categoryID = categoryID;
         this.unit = unit;
@@ -50,6 +54,14 @@ public class Product {
 
     public int getSupplierID() {
         return supplierID;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public void setSupplierID(int supplierID) {

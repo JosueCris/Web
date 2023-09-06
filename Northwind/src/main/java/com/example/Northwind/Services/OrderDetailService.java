@@ -7,7 +7,7 @@ import java.util.List;
 public interface OrderDetailService {
     OrderDetail buscar(int idOrdet);
     List<OrderDetail> consultar();
-    OrderDetail agregar(OrderDetail idOrdet);
+    OrderDetail agregar(OrderDetail ordet);
     OrderDetail actualizar(OrderDetail ordet, int idOrdet);
     void eliminar(int idOrdet);
 }

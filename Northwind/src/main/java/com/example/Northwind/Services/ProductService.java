@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProductService {
     Product buscar(int idProd);
     List<Product> consultar();
-    Product agregar(Product idProd);
+    Product agregar(Product prod);
     Product actualizar(Product prod, int idProd);
     void eliminar(int idProd);
 }

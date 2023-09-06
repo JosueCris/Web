@@ -7,7 +7,7 @@ import java.util.List;
 public interface SupplierService {
     Supplier buscar(int idSupp);
     List<Supplier> consultar();
-    Supplier agregar(Supplier idSupp);
+    Supplier agregar(Supplier supp);
     Supplier actualizar(Supplier supp, int idSupp);
     void eliminar(int idSupp);
 }
