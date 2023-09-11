@@ -1,6 +1,6 @@
 package com.example.Northwind.Security;
 
-import com.example.Northwind.ImpServices.IUserDetailsService;
+//import com.example.Northwind.ImpServices.IUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,9 +8,12 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -18,38 +21,46 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/publico/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                );
-        http
-                .formLogin(Customizer.withDefaults()
-                );
+        return http
+                .authorizeHttpRequests(auth ->
+                    auth.requestMatchers("http://localhost:8080/northwind/api/v1/employees/get/all").permitAll())
+//                        .requestMatchers("/publico/**").permitAll()
+//                        .requestMatchers("/admin/**").hasRole("ADMIN")
+//                        .anyRequest().authenticated()
+                .formLogin(form -> form.permitAll())
+//                .formLogin(Customizer.withDefaults()
+                .sessionManagement(session -> {
+                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                            .invalidSessionUrl("/login")
+                            .maximumSessions(1).expiredUrl("/login").sessionRegistry(sessionRegistry());
+                    session.sessionFixation().migrateSession();
+                })
+                .build();
 
-        http
-                .httpBasic(Customizer.withDefaults()
-                );
-        return http.build();
-//        return http
-//                .csrf(csrf -> csrf.disable())
-//                .authorizeRequests()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .httpBasic(httpBasic -> httpBasic.disable())
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .build();
+//        http
+//                .httpBasic(Customizer.withDefaults()
+//                );
+//        return http.build();
     }
 
     @Bean
-    public IUserDetailsService userDetailService() {
-        return new IUserDetailsService();
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
     }
 
-    @Bean
-    public PasswordEncoder passEnconder() {
-        return new BCryptPasswordEncoder();
+    public AuthenticationSuccessHandler successHandler() {
+        return (((request, response, authentication) ->
+                response.sendRedirect("/localhost:8080")
+        ));
     }
+
+//    @Bean
+//    public IUserDetailsService userDetailService() {
+//        return new IUserDetailsService();
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passEnconder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }
